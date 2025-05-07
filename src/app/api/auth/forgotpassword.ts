@@ -2,16 +2,8 @@
 
 import { sendPasswordResetEmail } from '@/lib/mail';
 import { prisma } from '@/lib/prisma';
-import { passwordForgotSchema } from '@/lib/zod';
+import { FormStatePasswordForgot, passwordForgotSchema } from '@/lib/zod';
 import crypto from 'crypto';
-
-type FormStatePasswordForgot =
-    | {
-        errors?: {
-            email?: string[];
-        }
-        message?: string;
-    } | undefined;
 
 export async function forgotPassword(state: FormStatePasswordForgot, formData: FormData): Promise<FormStatePasswordForgot> {
     const validatedFields = passwordForgotSchema.safeParse({

@@ -8,11 +8,9 @@ import { HTMLAttributes, useEffect, useState } from 'react';
 export default function AppearanceToggleTab({ className = '', ...props }: HTMLAttributes<HTMLDivElement>) {
     const { theme, setTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
-
     useEffect(() => {
         setMounted(true);
     }, []);
-
     const tabs: { value: 'light' | 'dark' | 'system'; icon: LucideIcon; label: string }[] = [
         { value: 'light', icon: Sun, label: 'Light' },
         { value: 'dark', icon: Moon, label: 'Dark' },

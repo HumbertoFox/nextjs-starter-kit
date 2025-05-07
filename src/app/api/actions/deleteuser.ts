@@ -2,16 +2,8 @@
 
 import { auth } from '@/auth';
 import { prisma } from '@/lib/prisma';
-import { deleteUserSchema } from '@/lib/zod';
+import { deleteUserSchema, FormStateUserDelete } from '@/lib/zod';
 import * as bcrypt from 'bcrypt-ts';
-
-type FormStateUserDelete =
-    | {
-        errors?: {
-            password?: string[];
-        }
-        message?: boolean;
-    } | undefined;
 
 export async function deleteUser(state: FormStateUserDelete, formData: FormData): Promise<FormStateUserDelete> {
     const validatedFields = deleteUserSchema.safeParse({

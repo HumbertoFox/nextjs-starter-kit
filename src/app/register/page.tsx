@@ -186,10 +186,10 @@ export default function Register() {
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectItem value="USER">
-                                    Usuário
+                                    User
                                 </SelectItem>
                                 <SelectItem value="ADMIN">
-                                    Administrador
+                                    Administrator
                                 </SelectItem>
                             </SelectContent>
                         </Select>

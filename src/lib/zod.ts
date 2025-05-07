@@ -75,3 +75,87 @@ export const passwordForgotSchema = object({
         .min(1, "Email is required")
         .email("Invalid email"),
 });
+
+export type FormStateRegisterUser =
+    | {
+        errors?: {
+            name?: string[];
+            email?: string[];
+            password?: string[];
+            role?: string[];
+            password_confirmation?: string[];
+        }
+        message?: string;
+        info?: string;
+    } | undefined;
+
+export type FormStateLoginUser =
+    | {
+        errors?: {
+            email?: string[];
+            password?: string[];
+        }
+        message?: string;
+        info?: string;
+    } | undefined;
+
+export type FormStateUserDelete =
+    | {
+        errors?: {
+            password?: string[];
+        }
+        message?: boolean;
+    } | undefined;
+
+export type FormStateRegisterAdminUser =
+    | {
+        errors?: {
+            name?: string[];
+            email?: string[];
+            password?: string[];
+            role?: string[];
+            password_confirmation?: string[];
+        }
+        message?: string;
+        info?: string;
+    } | undefined;
+
+export type FormStatePasswordUpdate =
+    | {
+        errors?: {
+            current_password?: string[];
+            password?: string[];
+            password_confirmation?: string[];
+        }
+        message?: boolean;
+    } | undefined;
+
+export type FormStateUserUpdate =
+    | {
+        errors?: {
+            name?: string[];
+            email?: string[];
+        };
+        message?: string;
+        success?: boolean;
+    } | undefined;
+
+export type FormStatePasswordForgot =
+    | {
+        errors?: {
+            email?: string[];
+        }
+        message?: string;
+    } | undefined;
+
+export type FormStatePasswordReset =
+    | {
+        errors?: {
+            email?: string[];
+            token?: string[];
+            password?: string[];
+            password_confirmation?: string[];
+        }
+        message?: string;
+        info?: string;
+    } | undefined;

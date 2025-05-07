@@ -214,10 +214,10 @@ export default function RegisterUserForm({ user, valueButton }: RegisterFormProp
                         </SelectTrigger>
                         <SelectContent>
                             <SelectItem value="USER">
-                                Usuário
+                                User
                             </SelectItem>
                             <SelectItem value="ADMIN">
-                                Administrador
+                                Administrator
                             </SelectItem>
                         </SelectContent>
                     </Select>

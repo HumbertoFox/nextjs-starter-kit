@@ -31,11 +31,7 @@ export default function Login() {
     const passwordRef = useRef<HTMLInputElement>(null);
     const [state, action, pending] = useActionState(loginUser, undefined);
     const [isVisibledPassword, setIsVisibledPassword] = useState<boolean>(false);
-    const [data, setData] = useState<LoginForm>({
-        email: '',
-        password: '',
-        remember: false,
-    });
+    const [data, setData] = useState<LoginForm>({ email: '', password: '', remember: false, });
 
     const togglePasswordVisibility = () => setIsVisibledPassword(!isVisibledPassword);
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,9 +44,7 @@ export default function Login() {
 
     const submit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
         const formData = new FormData(e.currentTarget);
-
         startTransition(() => action(formData));
     };
 
@@ -59,21 +53,13 @@ export default function Login() {
         const emailFromParams = searchParams.get('email');
 
         if (emailFromParams) {
-            setData((prevData) => ({
-                ...prevData,
-                email: emailFromParams,
-            }));
-
+            setData((prevData) => ({ ...prevData, email: emailFromParams }));
             passwordRef?.current?.focus();
         };
 
         if (statusFromParams) {
             setStatus(statusFromParams);
-
-            const timer = setTimeout(() => {
-                setStatus(true);
-            }, 5000);
-
+            const timer = setTimeout(() => setStatus(true), 5000);
             return () => clearTimeout(timer);
         };
     }, [searchParams]);
@@ -84,11 +70,7 @@ export default function Login() {
         };
 
         if (state?.message) {
-            setData({
-                email: '',
-                password: '',
-                remember: false
-            });
+            setData({ email: '', password: '', remember: false });
 
             if (!session?.user) update();
 

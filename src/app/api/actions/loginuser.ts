@@ -1,18 +1,8 @@
 'use server';
 
 import { signIn } from '@/auth';
-import { signInSchema } from '@/lib/zod';
+import { FormStateLoginUser, signInSchema } from '@/lib/zod';
 import { AuthError } from 'next-auth';
-
-type FormStateLoginUser =
-    | {
-        errors?: {
-            email?: string[];
-            password?: string[];
-        }
-        message?: string;
-        info?: string;
-    } | undefined;
 
 export async function loginUser(state: FormStateLoginUser, formData: FormData): Promise<FormStateLoginUser> {
     const validatedFields = signInSchema.safeParse({

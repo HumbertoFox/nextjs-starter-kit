@@ -1,20 +1,8 @@
 'use server';
 
 import { prisma } from '@/lib/prisma';
-import { passwordResetSchema } from '@/lib/zod';
+import { FormStatePasswordReset, passwordResetSchema } from '@/lib/zod';
 import { hash } from 'bcrypt-ts';
-
-type FormStatePasswordReset =
-    | {
-        errors?: {
-            email?: string[];
-            token?: string[];
-            password?: string[];
-            password_confirmation?: string[];
-        }
-        message?: string;
-        info?: string;
-    } | undefined;
 
 export async function resetPassword(state: FormStatePasswordReset, formData: FormData): Promise<FormStatePasswordReset> {
     const validatedFields = passwordResetSchema.safeParse({

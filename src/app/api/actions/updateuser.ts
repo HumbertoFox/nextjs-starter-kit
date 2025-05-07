@@ -2,17 +2,7 @@
 
 import { auth } from '@/auth';
 import { prisma } from '@/lib/prisma';
-import { updateUserSchema } from '@/lib/zod';
-
-type FormStateUserUpdate =
-    | {
-        errors?: {
-            name?: string[];
-            email?: string[];
-        };
-        message?: string;
-        success?: boolean;
-    } | undefined;
+import { FormStateUserUpdate, updateUserSchema } from '@/lib/zod';
 
 export async function updateUser(state: FormStateUserUpdate, formData: FormData): Promise<FormStateUserUpdate> {
     const validatedFields = updateUserSchema.safeParse({

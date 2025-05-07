@@ -2,7 +2,6 @@
 
 import { Eye, EyeClosed, LoaderCircle } from 'lucide-react';
 import { startTransition, useActionState, useState } from 'react';
-
 import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -14,9 +13,7 @@ import { resetPassword } from '@/app/api/auth/resetpassword';
 export default function ConfirmPassword() {
     const [state, action, pending] = useActionState(resetPassword, undefined);
     const [showPassword, setShowPassword] = useState<boolean>(false);
-    const [data, setData] = useState<Required<{ password: string }>>({
-        password: '',
-    });
+    const [data, setData] = useState<Required<{ password: string }>>({ password: '' });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { id, value } = e.target;
@@ -26,9 +23,7 @@ export default function ConfirmPassword() {
     const toggleShowPassword = () => setShowPassword(!showPassword);
     const submit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
         const formData = new FormData(e.currentTarget);
-
         startTransition(() => action(formData));
     };
     return (

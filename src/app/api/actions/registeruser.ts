@@ -1,21 +1,8 @@
 'use server';
 
 import { prisma } from '@/lib/prisma';
-import { signUpSchema } from '@/lib/zod';
+import { FormStateRegisterUser, signUpSchema } from '@/lib/zod';
 import * as bcrypt from 'bcrypt-ts';
-
-type FormStateRegisterUser =
-    | {
-        errors?: {
-            name?: string[];
-            email?: string[];
-            password?: string[];
-            role?: string[];
-            password_confirmation?: string[];
-        }
-        message?: string;
-        info?: string;
-    } | undefined;
 
 export async function registerUser(state: FormStateRegisterUser, formData: FormData): Promise<FormStateRegisterUser> {
     const validatedFields = signUpSchema.safeParse({
