@@ -1,33 +1,18 @@
-import AppLayout from '@/components/layouts/app-layout';
+import UsersBreadcrumb from '@/components/breadcrumbs/users-breadcrumb';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Icon } from '@/components/ui/icon';
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { prisma } from '@/lib/prisma';
-import { type BreadcrumbItem } from '@/types';
 import { UserPen, UserX } from 'lucide-react';
 import Link from 'next/link';
-
-const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Dashboard',
-        href: '/dashboard',
-    },
-    {
-        title: 'Administrators',
-        href: '/dashboard/admins',
-    },
-    {
-        title: 'Users',
-        href: '/dashboard/admins/users',
-    },
-];
 
 export default async function Users() {
     const users = await prisma.user.findMany({ where: { role: 'USER' } });
     return (
-        <AppLayout breadcrumbs={breadcrumbs}>
+        <>
+            <UsersBreadcrumb />
             <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
                 <div className="grid auto-rows-min gap-4 md:grid-cols-3">
                     <div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
@@ -119,6 +104,6 @@ export default async function Users() {
                     </Table>
                 </div>
             </div>
-        </AppLayout>
+        </>
     );
 }

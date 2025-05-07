@@ -31,7 +31,7 @@ export function UserMenuContent({ user }: UserMenuContentProps) {
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-                <Link className="block w-full" href="/dashboard/logout" onClick={cleanup}>
+                <Link className="block w-full" href="/logout" onClick={cleanup}>
                     <LogOut className="mr-2 rotate-180" />
                     Log out
                 </Link>

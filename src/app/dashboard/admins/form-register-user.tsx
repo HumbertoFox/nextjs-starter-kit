@@ -53,9 +53,7 @@ export default function RegisterUserForm({ user, valueButton }: RegisterFormProp
     const toggleShowPasswordConfirm = () => setShowPasswordConfirm(!showPasswordConfirm);
     const submit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
         const formData = new FormData(e.currentTarget);
-
         startTransition(() => action(formData));
     };
 
