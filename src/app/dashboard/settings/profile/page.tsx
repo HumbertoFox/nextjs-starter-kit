@@ -8,7 +8,6 @@ import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import SettingsLayout from '@/components/layouts/settings/app-layout';
 import { useSession } from 'next-auth/react';
 import { updateUser } from '@/app/api/actions/updateuser';
 import { emailVerifiedChecked } from '@/app/api/actions/emailverified';
@@ -76,7 +75,7 @@ export default function Profile() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [session]);
     return (
-        <SettingsLayout>
+        <>
             <div className="space-y-6">
                 <HeadingSmall title="Profile information" description="Update your name and email address" />
 
@@ -150,6 +149,6 @@ export default function Profile() {
             </div>
 
             <DeleteUser />
-        </SettingsLayout>
+        </>
     );
 }

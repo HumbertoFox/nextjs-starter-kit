@@ -1,7 +1,6 @@
 'use client';
 
 import InputError from '@/components/input-error';
-import SettingsLayout from '@/components/layouts/settings/app-layout';
 import { Transition } from '@headlessui/react';
 import { startTransition, useActionState, useEffect, useRef, useState } from 'react';
 import HeadingSmall from '@/components/heading-small';
@@ -53,7 +52,7 @@ export default function Password() {
         }
     }, [state]);
     return (
-        <SettingsLayout>
+        <>
             <div className="space-y-6">
                 <HeadingSmall title="Update password" description="Ensure your account is using a long, random password to stay secure" />
 
@@ -150,6 +149,6 @@ export default function Password() {
                     </div>
                 </form>
             </div>
-        </SettingsLayout>
+        </>
     );
 }
