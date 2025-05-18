@@ -21,7 +21,7 @@ type LoginForm = {
     remember: boolean;
 };
 
-export default function Login() {
+export default function LoginClient() {
     const { data: session, update } = useSession();
     const searchParams = useSearchParams();
     const [status, setStatus] = useState<string | boolean>(false);
