@@ -64,13 +64,15 @@ export default async function Admins() {
 
                                         <Dialog>
                                             <DialogTrigger asChild>
-                                                <button type="button" title={`Delete ${admin.name}`} disabled={admin.id === loggedAdmin}>
-                                                    <Icon
-                                                        iconNode={UserRoundX}
-                                                        aria-label={`Delete ${admin.name}`}
-                                                        className="size-6 text-red-600 cursor-pointer hover:text-red-500 duration-300"
-                                                    />
-                                                </button>
+                                                {admin.id !== loggedAdmin && (
+                                                    <button type="button" title={`Delete ${admin.name}`}>
+                                                        <Icon
+                                                            iconNode={UserRoundX}
+                                                            aria-label={`Delete ${admin.name}`}
+                                                            className="size-6 text-red-600 cursor-pointer hover:text-red-500 duration-300"
+                                                        />
+                                                    </button>
+                                                )}
                                             </DialogTrigger>
                                             <DialogContent>
                                                 <DialogTitle>
