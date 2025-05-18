@@ -42,7 +42,7 @@ export default function Profile() {
         const result = await emailVerifiedChecked();
         setStatus(result);
         if (result === 'verification-link-sent') {
-            setTimeout(() => router.push('/dashboard/logout'), 3000);
+            setTimeout(() => router.push('/logout'), 3000);
         }
     };
 
@@ -52,7 +52,6 @@ export default function Profile() {
             { title: 'Profile', href: '/dashboard/settings/profile' }
         ]);
     }, [setBreadcrumbs]);
-
     useEffect(() => {
         if (state?.success) {
             update({ name: data.name, email: data.email });
@@ -60,7 +59,6 @@ export default function Profile() {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [state]);
-
     useEffect(() => {
         if (session?.user && (!data.name || !data.email)) {
             setData({
@@ -118,7 +116,7 @@ export default function Profile() {
                                 <button
                                     type="button"
                                     onClick={handleVerifildEmail}
-                                    className="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current! dark:decoration-neutral-500"
+                                    className="text-foreground underline cursor-pointer decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current! dark:decoration-neutral-500"
                                 >
                                     Click here to resend the verification email.
                                 </button>

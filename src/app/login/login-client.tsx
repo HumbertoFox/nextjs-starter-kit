@@ -63,10 +63,9 @@ export default function Login() {
             return () => clearTimeout(timer);
         };
     }, [searchParams]);
-
     useEffect(() => {
         if (session?.user) {
-            router.push('/dashboard/logout');
+            router.push('/logout');
         };
 
         if (state?.message) {

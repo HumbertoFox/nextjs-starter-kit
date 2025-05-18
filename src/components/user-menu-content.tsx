@@ -23,7 +23,7 @@ export function UserMenuContent({ user }: UserMenuContentProps) {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
                 <DropdownMenuItem asChild>
-                    <Link className="block w-full" href="/dashboard/settings/profile" prefetch onClick={cleanup}>
+                    <Link className="block w-full cursor-pointer" href="/dashboard/settings/profile" prefetch onClick={cleanup}>
                         <Settings className="mr-2" />
                         Settings
                     </Link>
@@ -31,7 +31,7 @@ export function UserMenuContent({ user }: UserMenuContentProps) {
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-                <Link className="block w-full" href="/logout" onClick={cleanup}>
+                <Link className="block w-full cursor-pointer" href="/logout" onClick={cleanup}>
                     <LogOut className="mr-2 rotate-180" />
                     Log out
                 </Link>

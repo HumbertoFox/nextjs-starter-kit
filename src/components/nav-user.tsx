@@ -15,7 +15,7 @@ export function NavUser({ user }: { user: User }) {
         <SidebarMenu>
             <SidebarMenuItem>
                 <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
+                    <DropdownMenuTrigger className="cursor-pointer" asChild>
                         <SidebarMenuButton size="lg" className="text-sidebar-accent-foreground data-[state=open]:bg-sidebar-accent group">
                             <UserInfo user={user} />
                             <ChevronsUpDown className="ml-auto size-4" />

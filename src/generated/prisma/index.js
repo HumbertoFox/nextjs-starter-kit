@@ -168,7 +168,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\xampp\\htdocs\\NextJs\\next-auth-start-kit\\src\\generated\\prisma",
+      "value": "C:\\xampp\\htdocs\\NextJs\\nextjs-starter-kit\\src\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -182,7 +182,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\xampp\\htdocs\\NextJs\\next-auth-start-kit\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\xampp\\htdocs\\NextJs\\nextjs-starter-kit\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -196,11 +196,12 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgres://neondb_owner:npg_S4dDOsB6vTIi@ep-wild-resonance-a47a7fit-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require"
+        "value": null
       }
     }
   },

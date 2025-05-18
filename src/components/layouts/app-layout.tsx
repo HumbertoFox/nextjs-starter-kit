@@ -10,12 +10,12 @@ interface AppLayoutProps {
     breadcrumbs?: BreadcrumbItem[];
 };
 
-export default function AppLayout({ children, breadcrumbs, ...props }: AppLayoutProps) {
+export default function AppLayout({ children, ...props }: AppLayoutProps) {
     const { data: session } = useSession();
     if (!session?.user) return null;
     const user = session.user;
     return (
-        <AppLayoutTemplate user={user as User} breadcrumbs={breadcrumbs} {...props}>
+        <AppLayoutTemplate user={user as User} {...props}>
             {children}
         </AppLayoutTemplate>
     )
