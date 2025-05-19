@@ -10,9 +10,7 @@ export async function loginUser(state: FormStateLoginUser, formData: FormData): 
         password: formData.get('password') as string,
     });
 
-    if (!validatedFields.success) {
-        return { errors: validatedFields.error.flatten().fieldErrors, };
-    };
+    if (!validatedFields.success) return { errors: validatedFields.error.flatten().fieldErrors, };
 
     const { email, password } = validatedFields.data;
 

@@ -15,25 +15,18 @@ export async function updateAdminUser(state: FormStateRegisterAdminUser, formDat
 
     const id = formData.get('id') as string;
 
-    if (!validatedFields.success) {
-        return { errors: validatedFields.error.flatten().fieldErrors };
-    };
+    if (!validatedFields.success) return { errors: validatedFields.error.flatten().fieldErrors };
 
     const { name, email, password, role } = validatedFields.data;
 
     try {
         const existingUser = await prisma.user.findUnique({ where: { email } });
 
-        if (existingUser && existingUser.id !== id) {
-            return { errors: { email: ['This email is already in use by another user.'] } };
-        }
+        if (existingUser && existingUser.id !== id) return { errors: { email: ['This email is already in use by another user.'] } };
 
         const hashedPassword = await bcrypt.hash(password, 12);
 
-        await prisma.user.update({
-            where: { id },
-            data: { name, email, password: hashedPassword, role }
-        });
+        await prisma.user.update({ where: { id }, data: { name, email, password: hashedPassword, role } });
 
         return { message: 'User updated successfully!' };
 

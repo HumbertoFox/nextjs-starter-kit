@@ -10,39 +10,21 @@ export async function deleteUser(state: FormStateUserDelete, formData: FormData)
         password: formData.get('password') as string,
     });
 
-    if (!validatedFields.success) {
-        return {
-            errors: validatedFields.error.flatten().fieldErrors
-        };
-    };
+    if (!validatedFields.success) return { errors: validatedFields.error.flatten().fieldErrors };
 
     const { password } = validatedFields.data;
     const session = await auth();
 
-    if (!session?.user?.id) {
-        return { message: false };
-    }
+    if (!session?.user?.id) return { message: false };
 
-    const existingUser = await prisma.user.findUnique({
-        where: { id: session.user.id }
-    });
+    const existingUser = await prisma.user.findUnique({ where: { id: session.user.id } });
 
-    if (!existingUser) {
-        return { message: false };
-    }
+    if (!existingUser) return { message: false };
 
     const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
-    if (!isPasswordCorrect) {
-        return {
-            errors: {
-                password: ['Incorrect password.']
-            }
-        };
-    }
+    if (!isPasswordCorrect) return { errors: { password: ['Incorrect password.'] } };
 
-    await prisma.user.delete({
-        where: { id: session.user.id }
-    });
+    await prisma.user.delete({ where: { id: session.user.id } });
 
     return { message: true };
 }

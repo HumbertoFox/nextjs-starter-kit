@@ -1,5 +1,6 @@
 'use server';
 
+import { auth } from '@/auth';
 import { prisma } from '@/lib/prisma';
 import { FormStateRegisterUser, signUpSchema } from '@/lib/zod';
 import * as bcrypt from 'bcrypt-ts';
@@ -13,22 +14,19 @@ export async function registerUser(state: FormStateRegisterUser, formData: FormD
         password_confirmation: formData.get('password_confirmation') as string
     });
 
-    if (!validatedFields.success) {
-        return {
-            errors: validatedFields.error.flatten().fieldErrors
-        };
-    };
-
+    if (!validatedFields.success) return { errors: validatedFields.error.flatten().fieldErrors };
+    
     const { name, email, password, role } = validatedFields.data;
+    const session = await auth();
 
     try {
-        const hashedPassword = await bcrypt.hash(password, 12);
-
         const existingUser = await prisma.user.findUnique({ where: { email } });
-
-        if (existingUser) {
-            return { info: 'Data already registered' };
-        };
+        
+        if (session?.user && existingUser) return { errors: { email: ['This email is already in use.'] } }
+        
+        if (existingUser) return { info: 'Data already registered' };
+        
+        const hashedPassword = await bcrypt.hash(password, 12);
 
         await prisma.user.create({ data: { name, email, password: hashedPassword, role } });
 

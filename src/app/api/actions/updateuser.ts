@@ -10,26 +10,16 @@ export async function updateUser(state: FormStateUserUpdate, formData: FormData)
         email: formData.get('email') as string,
     });
 
-    if (!validatedFields.success) {
-        return {
-            errors: validatedFields.error.flatten().fieldErrors,
-        };
-    }
+    if (!validatedFields.success) return { errors: validatedFields.error.flatten().fieldErrors };
 
     const { name, email } = validatedFields.data;
     const session = await auth();
 
-    if (!session?.user) {
-        return { message: 'User not authenticated.' };
-    }
+    if (!session?.user) return { message: 'User not authenticated.' };
 
-    const emailInUse = await prisma.user.findUnique({
-        where: { email },
-    });
+    const emailInUse = await prisma.user.findUnique({ where: { email }, });
 
-    if (emailInUse && emailInUse.id !== session.user.id) {
-        return { errors: { email: ['This email is already in use.'] } };
-    }
+    if (emailInUse && emailInUse.id !== session.user.id) return { errors: { email: ['This email is already in use.'] } };
 
     const dataToUpdate: { name?: string; email?: string } = {};
     if (session.user.name !== name) dataToUpdate.name = name;
