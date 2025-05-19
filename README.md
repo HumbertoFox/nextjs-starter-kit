@@ -536,6 +536,24 @@ npx prisma migrate dev
 
 ---
 
+Deploy Vercel Add!
+
+```bash
+
+  export const dynamic = 'force-dynamic';
+
+```
+
+On the admin and users pages to avoid checking in the Database on Deploy.
+
+⚠️ **Attention:** After adding the Database remove it!
+
+> **Page:** `src\app\dashboard\admins\page.tsx`
+
+> **Page:** `src\app\dashboard\admins\users\page.tsx`
+
+---
+
 ### Developed in:
 
 ---
