@@ -7,6 +7,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { prisma } from '@/lib/prisma';
 import { UserPen, UserX } from 'lucide-react';
 import Link from 'next/link';
+import { DeleteAdminUserButton } from '../delete-admin-user-button';
 
 export default async function Users() {
     const users = await prisma.user.findMany({ where: { role: 'USER' } });
@@ -84,12 +85,7 @@ export default async function Users() {
                                                             Cancel
                                                         </Button>
                                                     </DialogClose>
-                                                    <Button
-                                                        type="button"
-                                                        variant="destructive"
-                                                    >
-                                                        Yes, Delete!
-                                                    </Button>
+                                                    <DeleteAdminUserButton userId={user.id} />
                                                 </DialogFooter>
                                             </DialogContent>
                                         </Dialog>

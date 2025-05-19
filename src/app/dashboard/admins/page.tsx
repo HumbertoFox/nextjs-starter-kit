@@ -8,6 +8,7 @@ import { prisma } from '@/lib/prisma';
 import { UserRoundPen, UserRoundX } from 'lucide-react';
 import Link from 'next/link';
 import AdminsBreadcrumbs from '@/components/breadcrumbs/admins-breadcrumbs';
+import { DeleteAdminUserButton } from './delete-admin-user-button';
 
 export default async function Admins() {
     const session = await auth();
@@ -83,12 +84,7 @@ export default async function Admins() {
                                                             Cancel
                                                         </Button>
                                                     </DialogClose>
-                                                    <Button
-                                                        type="button"
-                                                        variant="destructive"
-                                                    >
-                                                        Yes, Delete!
-                                                    </Button>
+                                                    <DeleteAdminUserButton userId={admin.id} />
                                                 </DialogFooter>
                                             </DialogContent>
                                         </Dialog>
