@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import UsersBreadcrumb from '@/components/breadcrumbs/users-breadcrumb';
 import { prisma } from '@/lib/prisma';
 import UsersClient from './users-client';
