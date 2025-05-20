@@ -8,6 +8,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { UserPen, UserX } from 'lucide-react';
 import Link from 'next/link';
 import { DeleteAdminUserButton } from '../delete-admin-user-button';
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
 
 interface Users {
     id: string;
@@ -15,7 +16,13 @@ interface Users {
     email: string | null;
 }
 
-export default function UsersClient({ users }: { users: Users[] }) {
+interface UsersClientProps {
+    users: Users[];
+    currentPage: number;
+    totalPages: number;
+}
+
+export default function UsersClient({ users, currentPage, totalPages }: UsersClientProps) {
     return (
         <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
             <div className="grid auto-rows-min gap-4 md:grid-cols-3">
@@ -43,10 +50,8 @@ export default function UsersClient({ users }: { users: Users[] }) {
                             </TableRow>
                         )}
                         {users.map((user, index) => (
-                            <TableRow key={index} className="cursor-default">
-                                <TableCell>
-                                    {index + 1}
-                                </TableCell>
+                            <TableRow key={user.id} className="cursor-default">
+                                <TableCell>{(currentPage - 1) * 10 + index + 1}</TableCell>
                                 <TableCell>{user.id}</TableCell>
                                 <TableCell>{user.name}</TableCell>
                                 <TableCell>{user.email}</TableCell>
@@ -98,6 +103,33 @@ export default function UsersClient({ users }: { users: Users[] }) {
                     </TableBody>
                 </Table>
             </div>
+            <Pagination>
+                <PaginationContent>
+                    <PaginationItem>
+                        <PaginationPrevious
+                            href={currentPage > 1 ? `?page=${currentPage - 1}` : '#'}
+                            aria-disabled={currentPage <= 1}
+                            className={currentPage <= 1 ? 'pointer-events-none opacity-50' : ''}
+                        />
+                    </PaginationItem>
+                    {Array.from({ length: totalPages }, (_, i) => (
+                        <PaginationItem key={i}>
+                            <PaginationLink href={`?page=${i + 1}`} isActive={currentPage === i + 1}
+                            >
+                                {i + 1}
+                            </PaginationLink>
+                        </PaginationItem>
+                    ))}
+                    <PaginationItem>
+                        <PaginationNext
+                            href={currentPage < totalPages ? `?page=${currentPage + 1}` : '#'}
+                            aria-disabled={currentPage >= totalPages}
+                            className={currentPage >= totalPages ? 'pointer-events-none opacity-50' : ''}
+                        />
+                    </PaginationItem>
+                </PaginationContent>
+            </Pagination>
+
         </div>
     );
 }

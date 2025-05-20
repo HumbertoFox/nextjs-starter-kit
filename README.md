@@ -474,6 +474,28 @@ This layout relies on authentication:
 
 ---
 
+<div align="center">
+
+  <img src="./public/images/pagination.png" width="450px" alt="Layout Edit Users and Admins" />
+
+</div>
+
+---
+
+### change the number of users per page!
+
+> **Page:** `src\app\dashboard\admins\users\page.tsx`
+
+const pageSize = `10`;
+
+### When changing the number of users per page also change the number of lines per page.
+
+> **Page:** `src\app\dashboard\admins\users\users-client.tsx`
+
+(currentPage - 1) * `10` + index + 1;
+
+---
+
 ## Install packages
 
 Node version 20+
