@@ -22,6 +22,34 @@ interface UsersClientProps {
     totalPages: number;
 }
 
+function getVisiblePages(current: number, total: number): (number | string)[] {
+    const delta = 2;
+    const range: (number | string)[] = [];
+
+    const start = Math.max(2, current - delta);
+    const end = Math.min(total - 1, current + delta);
+
+    range.push(1);
+
+    if (start > 2) {
+        range.push('...');
+    }
+
+    for (let i = start; i <= end; i++) {
+        range.push(i);
+    }
+
+    if (end < total - 1) {
+        range.push('...');
+    }
+
+    if (total > 1) {
+        range.push(total);
+    }
+
+    return range;
+}
+
 export default function UsersClient({ users, currentPage, totalPages }: UsersClientProps) {
     return (
         <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
@@ -112,12 +140,24 @@ export default function UsersClient({ users, currentPage, totalPages }: UsersCli
                             className={currentPage <= 1 ? 'pointer-events-none opacity-50' : ''}
                         />
                     </PaginationItem>
-                    {Array.from({ length: totalPages }, (_, i) => (
-                        <PaginationItem key={i}>
-                            <PaginationLink href={`?page=${i + 1}`} isActive={currentPage === i + 1}
-                            >
-                                {i + 1}
-                            </PaginationLink>
+                    {getVisiblePages(currentPage, totalPages).map((page, index) => (
+                        <PaginationItem key={index}>
+                            {page === '...' ? (
+                                <PaginationLink
+                                    href="#"
+                                    aria-disabled
+                                    className="pointer-events-none opacity-50"
+                                >
+                                    ...
+                                </PaginationLink>
+                            ) : (
+                                <PaginationLink
+                                    href={`?page=${page}`}
+                                    isActive={currentPage === page}
+                                >
+                                    {page}
+                                </PaginationLink>
+                            )}
                         </PaginationItem>
                     ))}
                     <PaginationItem>
