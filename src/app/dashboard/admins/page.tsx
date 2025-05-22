@@ -30,8 +30,8 @@ export default async function Admins() {
                         <TableHeader>
                             <TableRow className="cursor-default">
                                 <TableHead className="text-center">Nº</TableHead>
-                                <TableHead className="text-center">ID</TableHead>
-                                <TableHead className="text-center">Name</TableHead>
+                                <TableHead className="max-md:hidden text-center">ID</TableHead>
+                                <TableHead className="max-md:hidden text-center">Name</TableHead>
                                 <TableHead className="text-center">Email</TableHead>
                                 <TableHead className="text-center">Actions</TableHead>
                             </TableRow>
@@ -43,12 +43,10 @@ export default async function Admins() {
                                 </TableRow>
                             )}
                             {admins.map((admin, index) => (
-                                <TableRow key={index} className="cursor-default">
-                                    <TableCell>
-                                        {index + 1}
-                                    </TableCell>
-                                    <TableCell>{admin.id}</TableCell>
-                                    <TableCell>{admin.name}</TableCell>
+                                <TableRow key={admin.id} className="cursor-default">
+                                    <TableCell>{index + 1}</TableCell>
+                                    <TableCell className="max-md:hidden">{admin.id}</TableCell>
+                                    <TableCell className="max-md:hidden">{admin.name}</TableCell>
                                     <TableCell>{admin.email}</TableCell>
                                     <TableCell className="flex justify-evenly items-center my-1">
                                         <Link href={admin.id === loggedAdmin ? '/dashboard/settings/profile' : `/dashboard/admins/${admin.id}/edit`} title={`Editar ${admin.name}`}>

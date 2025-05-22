@@ -65,8 +65,8 @@ export default function UsersClient({ users, currentPage, totalPages }: UsersCli
                     <TableHeader>
                         <TableRow className="cursor-default">
                             <TableHead className="text-center">Nº</TableHead>
-                            <TableHead className="text-center">ID</TableHead>
-                            <TableHead className="text-center">Name</TableHead>
+                            <TableHead className="max-md:hidden text-center">ID</TableHead>
+                            <TableHead className="max-md:hidden text-center">Name</TableHead>
                             <TableHead className="text-center">Email</TableHead>
                             <TableHead className="text-center">Actions</TableHead>
                         </TableRow>
@@ -80,8 +80,8 @@ export default function UsersClient({ users, currentPage, totalPages }: UsersCli
                         {users.map((user, index) => (
                             <TableRow key={user.id} className="cursor-default">
                                 <TableCell>{(currentPage - 1) * 10 + index + 1}</TableCell>
-                                <TableCell>{user.id}</TableCell>
-                                <TableCell>{user.name}</TableCell>
+                                <TableCell className="max-md:hidden">{user.id}</TableCell>
+                                <TableCell className="max-md:hidden">{user.name}</TableCell>
                                 <TableCell>{user.email}</TableCell>
                                 <TableCell className="flex justify-evenly items-center my-1">
                                     <Link
