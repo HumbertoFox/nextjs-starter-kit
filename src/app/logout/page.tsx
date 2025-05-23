@@ -1,6 +1,6 @@
 'use client';
 
-import LoadingLoginSimple from '@/components/loading-login-simple';
+import LoadingLoginSplit from '@/components/loading-login-split';
 import { signOut } from 'next-auth/react';
 import { useEffect } from 'react';
 
@@ -9,6 +9,6 @@ export default function Logout() {
         signOut({ callbackUrl: '/login' });
     }, []);
     return (
-        <LoadingLoginSimple />
+        <LoadingLoginSplit />
     );
 }
