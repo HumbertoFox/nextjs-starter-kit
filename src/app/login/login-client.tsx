@@ -64,21 +64,13 @@ export default function LoginClient() {
         };
     }, [searchParams]);
     useEffect(() => {
-        if (session?.user) {
-            router.push('/logout');
-        };
-
         if (state?.message) {
             setData({ email: '', password: '', remember: false });
-
             if (!session?.user) update();
-
             router.push('/dashboard');
         };
 
-        if (state?.info && emailRef.current) {
-            emailRef.current.focus();
-        };
+        if (state?.info && emailRef.current) emailRef.current.focus();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [state, session?.user]);
     return (
